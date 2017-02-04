@@ -12,11 +12,11 @@ import java.util.stream.Stream;
 public class ParenthesesBalanceChecker {
 
     private static final List<Character> PARENTHESES = Arrays.asList('{', '}', '[', ']', '(', ')');
-    private static final Map<Character, Character> PARENTHESES_PAIR = Collections.unmodifiableMap(
+    private static final Map<Character, Character> PARENTHESES_COUNTER_PART = Collections.unmodifiableMap(
         Stream.of(
-            new SimpleEntry<>('{', '}'),
-            new SimpleEntry<>('[', ']'),
-            new SimpleEntry<>('(', ')')
+            new SimpleEntry<>('}', '{'),
+            new SimpleEntry<>(']', '['),
+            new SimpleEntry<>(')', '(')
         ).collect(
             Collectors.toMap(
                 SimpleEntry::getKey,
@@ -39,7 +39,7 @@ public class ParenthesesBalanceChecker {
 
                         if (stack.empty()) {
                             stack.add(c);
-                        } else if (stack.peek().equals(PARENTHESES_PAIR.get(c))) {
+                        } else if (stack.peek().equals(PARENTHESES_COUNTER_PART.get(c))) {
                             stack.pop();
                         } else {
                             stack.add(c);
